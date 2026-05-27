@@ -1,0 +1,26 @@
+-- Migration 017: per-message citation sources.
+--
+-- When an assistant message is generated with knowledge-base context
+-- injected, we now persist the list of retrieved source chunks so the UI
+-- can render a "🔍 N sources used" badge and expand it on click. The
+-- column is NULL for messages without retrieval (user messages, or
+-- assistant messages where memory was disabled / returned no matches).
+--
+-- Shape of sources_json when populated:
+--   [
+--     {
+--       "type": "semantic",
+--       "documentId": "...",
+--       "documentName": "monolith-to-microservices.pdf",
+--       "chunkId": "...",
+--       "chunkIndex": 42,
+--       "score": 0.83,
+--       "excerpt": "first ~200 chars of chunk text..."
+--     },
+--     ...
+--   ]
+--
+-- messages is NOT in the append-only triggers list (migration 012), so
+-- ALTER TABLE ADD COLUMN is safe. Existing rows get NULL by default.
+
+ALTER TABLE messages ADD COLUMN sources_json TEXT;

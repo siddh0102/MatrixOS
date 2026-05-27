@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Reuse the existing logo as favicon so the WebView's automatic
+         /favicon.ico fetch resolves instead of 404'ing in devtools. -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>MatrixOS</title>
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #0a1628;
+        z-index: 9999;
+      }
+      #splash::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.03;
+        background:
+          repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(79,195,247,0.4) 60px),
+          repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(79,195,247,0.4) 60px);
+      }
+      #splash img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+        animation: splash-pulse 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(79, 195, 247, 0.4));
+        position: relative;
+        z-index: 1;
+      }
+      #splash p {
+        margin-top: 24px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-size: 13px;
+        color: #4fc3f7;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+      }
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(0.97); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="splash">
+        <img src="/logo.png" alt="MatrixOS" />
+        <p>Loading...</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

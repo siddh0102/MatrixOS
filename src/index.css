@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Background / surface — deep navy-black (JARVIS HUD) */
+  --color-background: #0a1628;
+  --color-foreground: #b3e5fc;
+  --color-card: #0d1f3c;
+  --color-card-foreground: #b3e5fc;
+  --color-popover: #0d1f3c;
+  --color-popover-foreground: #b3e5fc;
+
+  /* Primary: Arc reactor ice-blue */
+  --color-primary: #4fc3f7;
+  --color-primary-hover: #29b6f6;
+  --color-primary-foreground: #0a1628;
+  --color-primary-muted: rgba(79, 195, 247, 0.12);
+
+  /* Secondary: Gold (Iron Man accent) */
+  --color-secondary: #1a2a4a;
+  --color-secondary-foreground: #ffb347;
+
+  /* Muted */
+  --color-muted: #132240;
+  --color-muted-foreground: #5a7a9a;
+
+  /* Accent */
+  --color-accent: #1a2a4a;
+  --color-accent-foreground: #b3e5fc;
+
+  /* Destructive */
+  --color-destructive: #ef5350;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted: rgba(239, 83, 80, 0.12);
+
+  /* Success */
+  --color-success: #26c6da;
+  --color-success-muted: rgba(38, 198, 218, 0.12);
+
+  /* Border / Input / Ring */
+  --color-border: rgba(79, 195, 247, 0.15);
+  --color-input: rgba(79, 195, 247, 0.15);
+  --color-input-focus: rgba(79, 195, 247, 0.3);
+  --color-ring: #4fc3f7;
+  --color-ring-subtle: rgba(79, 195, 247, 0.3);
+
+  /* Sidebar */
+  --color-sidebar: #081422;
+  --color-sidebar-foreground: #8ab4d4;
+  --color-sidebar-border: rgba(79, 195, 247, 0.1);
+  --color-sidebar-accent: rgba(79, 195, 247, 0.08);
+  --color-sidebar-accent-foreground: #b3e5fc;
+  --color-sidebar-muted: #3a5a7a;
+
+  /* Selection */
+  --color-selection: rgba(79, 195, 247, 0.2);
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle selection color */
+::selection {
+  background-color: var(--color-primary-muted);
+  color: var(--color-foreground);
+}
+
+/* Scrollbar styling — JARVIS holographic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 195, 247, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 195, 247, 0.4);
+}
+
+/* Focus ring utility — arc reactor glow */
+*:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(79, 195, 247, 0.3);
+}
+
+/* HUD grid background — subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.02;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(79, 195, 247, 0.4) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(79, 195, 247, 0.4) 60px);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation keyframes for UI polish */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(79, 195, 247, 0.2); }
+  50% { box-shadow: 0 0 16px rgba(79, 195, 247, 0.4); }
+}
+
+@keyframes arc-reactor {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Utility classes for animations */
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.15s ease-out;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}

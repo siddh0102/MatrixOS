@@ -1,0 +1,63 @@
+[package]
+name = "matrixos"
+version = "0.1.0"
+description = "MatrixOS Desktop Application"
+authors = []
+edition = "2021"
+
+[lib]
+name = "matrixos_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-opener = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+keyring = { version = "3", features = ["windows-native"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlite-vec = "0.1"
+rusqlite = { version = "0.31", features = ["bundled", "load_extension"] }
+pdf-extract = "0.7"
+zip = "2"
+tauri-plugin-dialog = "2"
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls-native-roots"] }
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["io", "rt"] }
+croner = "=2.0.8"
+chrono-tz = "0.10"
+async-trait = "0.1"
+dashmap = "6"
+futures-util = "0.3"
+url = "2.5"
+tauri-plugin-single-instance = "2"
+bytes = "1"
+ipnetwork = "0.20"
+nanoid = "0.4"
+chrono = { version = "0.4", features = ["serde"] }
+globwalk = "0.9"
+
+[target.'cfg(windows)'.dependencies]
+win32job = "1"
+winapi = { version = "0.3", features = ["processthreadsapi", "handleapi", "libloaderapi"] }
+windows-sys = { version = "0.59", features = ["Win32_System_Threading", "Win32_Foundation"] }
+
+[target.'cfg(unix)'.dependencies]
+nix = { version = "0.29", features = ["signal", "process"] }
+
+[dev-dependencies]
+wiremock = "0.6"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+which = "6"
+tempfile = "3"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
