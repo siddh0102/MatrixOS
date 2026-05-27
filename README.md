@@ -114,5 +114,4 @@ data directory and are git-ignored.
 
 ## License
 
-No license yet — add one before sharing publicly. Without a `LICENSE` file, the
-code is "all rights reserved" by default.
+[MIT](LICENSE) © Siddhartha Tiwari
