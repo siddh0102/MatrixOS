@@ -69,6 +69,15 @@ npm run tauri dev
 npm run tauri build
 ```
 
+### Windows installer certificate warning
+
+When running the `.exe` installer, Windows may display a security warning about an unsigned application. This is expected as I have not signed the code with X509 certificate yet. To proceed:
+
+1. Click **"More info"** on the warning dialog.
+2. Select **"Run anyway"** to install MatrixOS.
+
+Your data and API keys remain secure — they're stored locally in the OS keychain, never transmitted during installation.
+
 ### First launch
 1. **Settings → Providers** → add a provider and paste its API key (stored
    securely in your OS keychain).
